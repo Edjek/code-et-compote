@@ -45,6 +45,7 @@ class Router
             }
         }
 
-        include_once '../templates/error404.php';
+        header('HTTP/1.0 404 Not Found');
+        include_once '../templates/error-404.php';
     }
 }
