@@ -16,9 +16,7 @@ class Router
             $this->currentController->show();
         });
 
-        $this->addRoutes('/contact', function () {
-            
-        });
+        $this->addRoutes('/contact', function () {});
     }
 
     private function addRoutes(string $route, callable $closure)
@@ -34,7 +32,10 @@ class Router
         foreach ($this->routes as $key => $closure) {
             if ($requestUri === $key) {
                 $closure();
+                return;
             }
         }
+
+        include_once '../templates/error404.php';
     }
 }
