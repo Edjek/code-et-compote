@@ -4,7 +4,7 @@ CREATE TABLE user (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     registration_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    status ENUM(`member`, `moderator`, `admin`) NOT NULL DEFAULT `member`
+    status ENUM('member', 'moderator', 'admin') NOT NULL DEFAULT 'member'
 );
 
 CREATE TABLE category (

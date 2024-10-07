@@ -49,5 +49,4 @@ Voici le Modèle Conceptuel de Données (MCD) correspondant à la structure de b
 4. Topic (1,N) - Message (0,N)
    Un sujet peut contenir plusieurs messages, un message appartient à un sujet.
 
-
 Ce MCD représente une structure de forum avec des utilisateurs, des catégories, des sujets, des messages, des tags et des réactions. Il permet une gestion complète des discussions, avec la possibilité de catégoriser les sujets, de les taguer, et de réagir aux messages.
