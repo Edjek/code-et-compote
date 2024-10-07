@@ -16,7 +16,8 @@ class Router
             $this->currentController->show();
         });
 
-        $this->addRoutes('/contact', function () {});
+    //  Creez une route /contactez-nous
+    // Le Controller ContactController : methode show() qui affiche un formulaire de contact
     }
 
     private function addRoutes(string $route, callable $closure)
