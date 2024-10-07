@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Controller\Front\ContactController;
 use App\Controller\Front\HomeController;
 
 class Router
@@ -16,8 +17,15 @@ class Router
             $this->currentController->show();
         });
 
-    //  Creez une route /contactez-nous
-    // Le Controller ContactController : methode show() qui affiche un formulaire de contact
+        $this->addRoutes('/contactez-nous', function () {
+            $this->currentController = new ContactController();
+            $this->currentController->show();
+        });
+
+
+
+        //  Creez une route /contactez-nous
+        // Le Controller ContactController : methode show() qui affiche un formulaire de contact
     }
 
     private function addRoutes(string $route, callable $closure)
