@@ -2,9 +2,11 @@
 
 namespace App\Controller\Front;
 
-class ContactController
+use App\Controller\AbstractController;
+
+class ContactController extends AbstractController
 {
     public function show(){
-        include_once '../templates/front/contactez-nous.php';
+        $this->render('front/contactez-nous', ['']);
     }
 }

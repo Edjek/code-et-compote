@@ -2,14 +2,16 @@
 
 namespace App\Controller\Front;
 
+use App\Controller\AbstractController;
 use App\Repository\TopicRepository;
 
-class HomeController
+class HomeController extends AbstractController
 {
     public function show()
     {
         $repository = new TopicRepository();
         $topics = $repository->findAll();
-        include_once '../templates/front/home.php';
+
+        $this->render('front/home', ['topics' => $topics,]);
     }
 }

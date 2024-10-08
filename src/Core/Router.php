@@ -22,10 +22,10 @@ class Router
             $this->currentController->show();
         });
 
-
-
-        //  Creez une route /contactez-nous
-        // Le Controller ContactController : methode show() qui affiche un formulaire de contact
+        // creer un formulaire d'inscription
+        // creer une route /inscription
+        // UserController showSignUpForm
+            // afficher un formulaire d'inscription
     }
 
     private function addRoutes(string $route, callable $closure)
