@@ -7,11 +7,11 @@
             <input class="form-control" type="text" id="pseudo" name="">
         </div>
         <div class="mb-3">
-            <label for="email">Email</label>
+            <label  class="form-label" for="email">Email</label>
             <input type="text" id="email" name="email" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="password">Mot de passe</label>
+            <label class="form-label" for="password">Mot de passe</label>
             <input type="password" id="password" name="pswd" class="form-control">
         </div>
         <input type="submit" value="Inscription" class="btn btn-primary">
