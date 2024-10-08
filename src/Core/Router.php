@@ -25,7 +25,7 @@ class Router
         // creer un formulaire d'inscription
         // creer une route /inscription
         // UserController showSignUpForm
-            // afficher un formulaire d'inscription
+            // afficher un formulaire d'inscription dans templates/front/sign-up.php
     }
 
     private function addRoutes(string $route, callable $closure)
