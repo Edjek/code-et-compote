@@ -48,9 +48,13 @@ class UserController extends AbstractController
 
         // On doit verifier si ce pseudo ou si cet email existe en bdd
 
-        // je veux 2 test
+        // Je veux 2 test :
+        // $repository->checkIfUsernameExists($username);
         // Si le pseudo existe on lui dira ce pseudo est deja utilisé
+
         // Si l'email existe on lui dira cet email est deja utilisé
+        // $repository->checkIfEmailExists($email);
+
         $repository->addUser($username, $email, $pswd);
     }
 }
