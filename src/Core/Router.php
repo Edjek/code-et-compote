@@ -28,6 +28,11 @@ class Router
             $this->currentController->showSignUpForm();
         });
 
+        $this->addRoutes('/processForm', function(){
+            $this->currentController = new UserController();
+            $this->currentController->processSignUpForm();
+        });
+
 
         // creer une route /processForm
         // UserController processSignUpForm
