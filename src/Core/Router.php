@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Controller\Front\ContactController;
 use App\Controller\Front\HomeController;
+use App\Controller\Front\UserController;
 
 class Router
 {
@@ -22,10 +23,16 @@ class Router
             $this->currentController->show();
         });
 
-        // creer un formulaire d'inscription
-        // creer une route /inscription
-        // UserController showSignUpForm
-            // afficher un formulaire d'inscription dans templates/front/sign-up.php
+        $this->addRoutes('/inscription', function () {
+            $this->currentController = new UserController();
+            $this->currentController->showSignUpForm();
+        });
+
+
+        // creer une route /processForm
+        // UserController processSignUpForm
+        // Verifieer que le formulaire est envoyé en POST, traiter les données? verifier que l'email a le bon format
+        // Sauvergarder en base
     }
 
     private function addRoutes(string $route, callable $closure)
