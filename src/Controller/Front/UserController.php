@@ -38,13 +38,11 @@ class UserController extends AbstractController
             header('Location:/code-et-compote/inscription');
             exit;
         }
+
         $username = trim($_POST['pseudo']);
         $email = trim($_POST['email']);
         $pswd = trim($_POST['pswd']);
         $pswd = password_hash($pswd, PASSWORD_DEFAULT);
-
-
-
 
         $repository = new UserRepository();
 
@@ -54,7 +52,5 @@ class UserController extends AbstractController
         // Si le pseudo existe on lui dira ce pseudo est deja utilisé
         // Si l'email existe on lui dira cet email est deja utilisé
         $repository->addUser($username, $email, $pswd);
-
-
     }
 }
