@@ -151,4 +151,6 @@ class UserController extends AbstractController
         header('Location:/code-et-compote/');
         exit;
     }
+
+    // methode deconnexion
 }

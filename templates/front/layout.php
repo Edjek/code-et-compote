@@ -27,8 +27,19 @@ $session = new Session();
         <a class="navbar-brand" href="/code-et-compote/" class=""><i class="bi bi-code-slash"></i> Code et Compote</a>
 
         <nav class=" ms-auto d-flex gap-2">
-            <a class="nav-link" href="/code-et-compote/inscription">inscription</a>
-            <a class="nav-link" href="/code-et-compote/connexion">connexion</a>
+            <?php if ($session->isLogged()) { ?>
+
+                <!-- Creer une route /deconnexion -->
+                <!-- UserController : logout() -->
+                <!-- logout -->
+                <!-- appellera une methode destruct qui viendra de la class Session -->
+                <!-- Redirige vers l'accueil avec un message -->
+                <a class="nav-link" href="">deconnexion</a>
+            <?php  } else { ?>
+                <a class="nav-link" href="/code-et-compote/inscription">inscription</a>
+                <a class="nav-link" href="/code-et-compote/connexion">connexion</a>
+            <?php } ?>
+
             <a class="nav-link" href="/code-et-compote/contactez-nous">contact</a>
         </nav>
     </header>
