@@ -7,11 +7,17 @@ use App\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
+    /**
+     * @return void
+     */
     public function showSignUpForm(): void
     {
         $this->render('front/sign-up');
     }
 
+    /**
+     * @return void
+     */
     public function processSignUpForm(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -48,7 +54,7 @@ class UserController extends AbstractController
 
         $user = $repository->checkIfUsernameExists($username);
 
-        if ($user['username'] === $username) {
+        if ($user !== false) {
             header('Location:/code-et-compote/inscription');
             exit;
         }
@@ -59,9 +65,6 @@ class UserController extends AbstractController
             header('Location:/code-et-compote/inscription');
             exit;
         }
-
-        // Si l'email existe on lui dira cet email est deja utilisé
-        // $repository->checkIfEmailExists($email);
 
         $repository->addUser($username, $email, $pswd);
     }

@@ -4,6 +4,12 @@ namespace App\Controller;
 
 abstract class AbstractController
 {
+    /**
+     * @param string $path
+     * @param array $array
+     *
+     * @return void
+     */
     protected function render(string $path, array $array = []): void
     {
         extract($array);

@@ -4,8 +4,14 @@ namespace App\Core;
 
 class Database
 {
+    /**
+     * @var \PDO|null
+     */
     private static ?\PDO $pdo = null;
 
+    /**
+     * @return void
+     */
     public static function initConnexion(): void
     {
         if (self::$pdo  === null) {
@@ -17,6 +23,9 @@ class Database
         }
     }
 
+    /**
+     * @return \PDO|null
+     */
     public static function getPdo(): ?\PDO
     {
         return self::$pdo;

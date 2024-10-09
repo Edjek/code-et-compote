@@ -8,8 +8,14 @@ use App\Controller\Front\UserController;
 
 class Router
 {
+    /**
+     * @var array
+     */
     private array $routes;
 
+    /**
+     * @var object
+     */
     private object $currentController;
 
     public function __construct()
@@ -43,11 +49,20 @@ class Router
 
     }
 
+    /**
+     * @param string $route
+     * @param callable $closure
+     *
+     * @return void
+     */
     private function addRoutes(string $route, callable $closure): void
     {
         $this->routes[$route] = $closure;
     }
 
+    /**
+     * @return void
+     */
     public function execute(): void
     {
         $requestUri = $_SERVER['REQUEST_URI'];

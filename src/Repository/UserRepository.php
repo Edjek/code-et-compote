@@ -6,6 +6,13 @@ use App\Repository\AbstractRepository;
 
 class UserRepository extends AbstractRepository
 {
+    /**
+     * @param string $username
+     * @param string $email
+     * @param string $pswd
+     *
+     * @return void
+     */
     public function addUser(string $username, string $email, string $pswd): void
     {
         $stmt = $this->pdo->prepare('INSERT INTO user (username, email, password) VALUES (:username, :email, :pswd)');
@@ -13,6 +20,11 @@ class UserRepository extends AbstractRepository
         $stmt->execute([':username' => $username, ':email' => $email, ':pswd' => $pswd]);
     }
 
+    /**
+     * @param string $username
+     *
+     * @return array|bool
+     */
     public function checkIfUsernameExists(string $username): array | bool
     {
         $stmt = $this->pdo->prepare('SELECT * FROM user WHERE username=:username');
@@ -22,6 +34,11 @@ class UserRepository extends AbstractRepository
         return $stmt->fetch();
     }
 
+    /**
+     * @param string $email
+     *
+     * @return array|bool
+     */
     public function checkIfEmailExists(string $email): array | bool
     {
         $stmt = $this->pdo->prepare('SELECT * FROM user WHERE email=:email');

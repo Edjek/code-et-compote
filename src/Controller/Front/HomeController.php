@@ -7,6 +7,9 @@ use App\Repository\TopicRepository;
 
 class HomeController extends AbstractController
 {
+    /**
+     * @return void
+     */
     public function show(): void
     {
         $repository = new TopicRepository();
