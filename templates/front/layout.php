@@ -25,7 +25,7 @@
             <a class="nav-link" href="/code-et-compote/contactez-nous">contact</a>
         </nav>
     </header>
-    <main>
+    <main class="p-2">
 
         <?= $content; ?>
     </main>
