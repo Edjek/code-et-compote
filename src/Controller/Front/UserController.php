@@ -152,5 +152,17 @@ class UserController extends AbstractController
         exit;
     }
 
-    // methode deconnexion
+    /**
+     * @return void
+     */
+    public function logout(): void
+    {
+        $session = new Session();
+
+        $session->destruct();
+
+        $session->createFlashMessage('Vous êtes déconnecté!');
+        header('Location:/code-et-compote/');
+        exit;
+    }
 }

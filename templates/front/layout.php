@@ -28,13 +28,7 @@ $session = new Session();
 
         <nav class=" ms-auto d-flex gap-2">
             <?php if ($session->isLogged()) { ?>
-
-                <!-- Creer une route /deconnexion -->
-                <!-- UserController : logout() -->
-                <!-- logout -->
-                <!-- appellera une methode destruct qui viendra de la class Session -->
-                <!-- Redirige vers l'accueil avec un message -->
-                <a class="nav-link" href="">deconnexion</a>
+                <a class="nav-link" href="/code-et-compote/deconnexion">deconnexion</a>
             <?php  } else { ?>
                 <a class="nav-link" href="/code-et-compote/inscription">inscription</a>
                 <a class="nav-link" href="/code-et-compote/connexion">connexion</a>

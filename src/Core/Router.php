@@ -50,6 +50,11 @@ class Router
             $this->currentController->processSignInForm();
         });
 
+        $this->addRoutes('/deconnexion', function (): void {
+            $this->currentController = new UserController();
+            $this->currentController->logout();
+        });
+
         // 2 routes :
         // Afficher un formulaire de connexion /connexion
         // UserController : showSignInForm

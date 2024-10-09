@@ -47,4 +47,11 @@ class Session
         $_SESSION['is_logged'] = true;
         $_SESSION['status'] = $user['status'];
     }
+
+    public function destruct(): void
+    {
+        session_start();
+        unset($_SESSION);
+        session_destroy();
+    }
 }
