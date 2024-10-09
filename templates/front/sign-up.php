@@ -1,5 +1,5 @@
 <section>
-    <h1 class="display-3">Formulaire d'inscription</h1>
+    <h1 class="display-5">Formulaire d'inscription</h1>
     <form action="/code-et-compote/processSignUpForm" method="POST" class="w-75 mx-auto my-5">
         <div class="mb-3">
             <label for="pseudo" class="form-label">Pseudo</label>

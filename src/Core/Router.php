@@ -54,14 +54,6 @@ class Router
             $this->currentController = new UserController();
             $this->currentController->logout();
         });
-
-        // 2 routes :
-        // Afficher un formulaire de connexion /connexion
-        // UserController : showSignInForm
-
-        // Traiter le formulaire de connexion /processSignInForm
-        // UserController : processSignInForm
-
     }
 
     /**

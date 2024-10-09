@@ -1,5 +1,5 @@
 <section>
-    <h1 class="display-3">Formulaire de contact</h1>
+    <h1 class="display-5">Formulaire de contact</h1>
     <form action="" class="w-75 mx-auto my-5">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
