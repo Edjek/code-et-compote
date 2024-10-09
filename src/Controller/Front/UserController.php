@@ -46,11 +46,19 @@ class UserController extends AbstractController
 
         $repository = new UserRepository();
 
-        // On doit verifier si ce pseudo ou si cet email existe en bdd
+        $user = $repository->checkIfUsernameExists($username);
 
-        // Je veux 2 test :
-        // $repository->checkIfUsernameExists($username);
-        // Si le pseudo existe on lui dira ce pseudo est deja utilisé
+        if ($user['username'] === $username) {
+            header('Location:/code-et-compote/inscription');
+            exit;
+        }
+
+        $email = $repository->checkIfEmailExists($email);
+
+        if ($email !== false) {
+            header('Location:/code-et-compote/inscription');
+            exit;
+        }
 
         // Si l'email existe on lui dira cet email est deja utilisé
         // $repository->checkIfEmailExists($email);

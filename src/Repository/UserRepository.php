@@ -12,4 +12,22 @@ class UserRepository extends AbstractRepository
 
         $stmt->execute([':username' => $username, ':email' => $email, ':pswd' => $pswd]);
     }
+
+    public function checkIfUsernameExists(string $username): array | bool
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM user WHERE username=:username');
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function checkIfEmailExists(string $email): array | bool
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM user WHERE email=:email');
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
 }

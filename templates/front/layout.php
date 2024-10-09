@@ -21,7 +21,7 @@
 
         <nav class=" ms-auto d-flex gap-2">
             <a class="nav-link" href="/code-et-compote/inscription">inscription</a>
-            <a class="nav-link" href="">connexion</a>
+            <a class="nav-link" href="/code-et-compote/connexion">connexion</a>
             <a class="nav-link" href="/code-et-compote/contactez-nous">contact</a>
         </nav>
     </header>
