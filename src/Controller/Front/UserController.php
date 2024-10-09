@@ -7,12 +7,12 @@ use App\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
-    public function showSignUpForm()
+    public function showSignUpForm(): void
     {
         $this->render('front/sign-up');
     }
 
-    public function processSignUpForm()
+    public function processSignUpForm(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location:/code-et-compote/inscription');

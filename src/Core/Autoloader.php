@@ -6,7 +6,7 @@ class Autoloader
 {
     public static function register(): void
     {
-        spl_autoload_register(function ($className) {
+        spl_autoload_register(function ($className): void {
             $path = str_replace('App', 'src', $className);
 
             $path = str_replace('\\', DIRECTORY_SEPARATOR, $path);

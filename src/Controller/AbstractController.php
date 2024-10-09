@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 abstract class AbstractController
 {
     protected function render(string $path, array $array = []): void

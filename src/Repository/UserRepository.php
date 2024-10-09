@@ -6,7 +6,7 @@ use App\Repository\AbstractRepository;
 
 class UserRepository extends AbstractRepository
 {
-    public function addUser($username, $email, $pswd)
+    public function addUser(string $username, string $email, string $pswd): void
     {
         $stmt = $this->pdo->prepare('INSERT INTO user (username, email, password) VALUES (:username, :email, :pswd)');
 

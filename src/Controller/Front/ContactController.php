@@ -6,7 +6,8 @@ use App\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
-    public function show(){
+    public function show(): void
+    {
         $this->render('front/contactez-nous');
     }
 }

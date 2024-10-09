@@ -7,7 +7,7 @@ use App\Repository\TopicRepository;
 
 class HomeController extends AbstractController
 {
-    public function show()
+    public function show(): void
     {
         $repository = new TopicRepository();
         $topics = $repository->findAll();

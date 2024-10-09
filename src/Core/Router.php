@@ -9,43 +9,38 @@ use App\Controller\Front\UserController;
 class Router
 {
     private array $routes;
+
     private object $currentController;
 
     public function __construct()
     {
-        $this->addRoutes('/', function () {
+        $this->addRoutes('/', function (): void {
             $this->currentController = new HomeController();
             $this->currentController->show();
         });
 
-        $this->addRoutes('/contactez-nous', function () {
+        $this->addRoutes('/contactez-nous', function (): void {
             $this->currentController = new ContactController();
             $this->currentController->show();
         });
 
-        $this->addRoutes('/inscription', function () {
+        $this->addRoutes('/inscription', function (): void {
             $this->currentController = new UserController();
             $this->currentController->showSignUpForm();
         });
 
-        $this->addRoutes('/processForm', function(){
+        $this->addRoutes('/processForm', function (): void {
             $this->currentController = new UserController();
             $this->currentController->processSignUpForm();
         });
-
-
-        // creer une route /processForm
-        // UserController processSignUpForm
-        // Verifieer que le formulaire est envoyé en POST, traiter les données? verifier que l'email a le bon format
-        // Sauvergarder en base
     }
 
-    private function addRoutes(string $route, callable $closure)
+    private function addRoutes(string $route, callable $closure): void
     {
         $this->routes[$route] = $closure;
     }
 
-    public function execute()
+    public function execute(): void
     {
         $requestUri = $_SERVER['REQUEST_URI'];
         $requestUri = str_replace('/code-et-compote', '', $requestUri);
