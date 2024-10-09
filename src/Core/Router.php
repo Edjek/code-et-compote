@@ -35,9 +35,19 @@ class Router
             $this->currentController->showSignUpForm();
         });
 
-        $this->addRoutes('/processForm', function (): void {
+        $this->addRoutes('/processSignUpForm', function (): void {
             $this->currentController = new UserController();
             $this->currentController->processSignUpForm();
+        });
+
+        $this->addRoutes('/connexion', function (): void {
+            $this->currentController = new UserController();
+            $this->currentController->showSignInForm();
+        });
+
+        $this->addRoutes('/processSignInForm', function (): void {
+            $this->currentController = new UserController();
+            $this->currentController->processSignInForm();
         });
 
         // 2 routes :

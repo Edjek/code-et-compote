@@ -25,7 +25,7 @@ class UserRepository extends AbstractRepository
      *
      * @return array|bool
      */
-    public function checkIfUsernameExists(string $username): array | bool
+    public function findUserByUsername(string $username): array | bool
     {
         $stmt = $this->pdo->prepare('SELECT * FROM user WHERE username=:username');
         $stmt->bindParam(':username', $username);
@@ -39,7 +39,7 @@ class UserRepository extends AbstractRepository
      *
      * @return array|bool
      */
-    public function checkIfEmailExists(string $email): array | bool
+    public function findUserByEmail(string $email): array | bool
     {
         $stmt = $this->pdo->prepare('SELECT * FROM user WHERE email=:email');
         $stmt->bindParam(':email', $email);
