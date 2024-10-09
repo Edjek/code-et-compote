@@ -1,7 +1,7 @@
 <section>
     <h1 class="display-3">Accueil</h1>
     <div class=" w-75 mx-auto my-5 p-3 border rounded">
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
             <tbody>
                 <?php foreach ($topics as $topic) { ?>
                     <tr>
