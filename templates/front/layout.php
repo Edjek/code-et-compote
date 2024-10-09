@@ -1,3 +1,10 @@
+<?php
+
+use App\Core\Session;
+
+$session = new Session();
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -25,6 +32,8 @@
             <a class="nav-link" href="/code-et-compote/contactez-nous">contact</a>
         </nav>
     </header>
+    <?php $session->getFlashMessage(); ?>
+
     <main class="p-2">
 
         <?= $content; ?>
