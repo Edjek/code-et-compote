@@ -33,6 +33,14 @@ class Router
             $this->currentController = new UserController();
             $this->currentController->processSignUpForm();
         });
+
+        // 2 routes :
+        // Afficher un formulaire de connexion /connexion
+        // UserController : showSignInForm
+
+        // Traiter le formulaire de connexion /processSignInForm
+        // UserController : processSignInForm
+
     }
 
     private function addRoutes(string $route, callable $closure): void
