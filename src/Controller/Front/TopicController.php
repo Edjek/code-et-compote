@@ -3,18 +3,17 @@
 namespace App\Controller\Front;
 
 use App\Controller\AbstractController;
+use App\Repository\TopicRepository;
 
 class TopicController extends AbstractController
 {
-    public function showTopic($params)
+    public function showTopic(array $params)
     {
-
         $id = $params['id'];
 
-        // requete vers la bdd je veux recuperer tous les messages qui sont dans le topic en question
-        // la requete prendra id en parametre
+        $repository = new TopicRepository();
+        $messages = $repository->findAllMessageByTopicId($id);
 
-        // afficher la discussion templates topic.php
-
+        $this->render('front/topic', ['messages' => $messages]);
     }
 }

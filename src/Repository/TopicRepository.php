@@ -16,4 +16,13 @@ class TopicRepository extends AbstractRepository
 
         return $stmt->fetchAll();
     }
+
+    public function findAllMessageByTopicId(int $id): array | bool
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM message WHERE topic_id=:id');
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
 }
