@@ -144,7 +144,6 @@ class UserController extends AbstractController
             exit;
         };
 
-        // methode createUserSession Session
         $session->createUserSession($user);
         $session->createFlashMessage('Vous êtes connecté!');
 

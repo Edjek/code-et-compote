@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Controller\Front\ContactController;
 use App\Controller\Front\HomeController;
+use App\Controller\Front\TopicController;
 use App\Controller\Front\UserController;
 
 class Router
@@ -55,11 +56,9 @@ class Router
             $this->currentController->logout();
         });
 
-        $this->addRoutes('/topic/{id}', function($params){
-            echo $params['id'];
-            die;
-            // $this->currentController = new TopicController();
-            // $this->currentController->showTopic();
+        $this->addRoutes('/topic/{id}', function (array $params): void {
+            $this->currentController = new TopicController();
+            $this->currentController->showTopic($params);
         });
     }
 
@@ -72,9 +71,7 @@ class Router
     private function addRoutes(string $route, callable $closure): void
     {
         $pattern = str_replace('/', '\/', $route);
-
         $pattern = preg_replace('/\{(\w+)\}/', '(?P<$1>[^\/]+)', $pattern);
-
         $pattern = '/^' . $pattern . '$/';
 
         $this->routes[$pattern] = $closure;
@@ -91,7 +88,6 @@ class Router
         foreach ($this->routes as $key => $closure) {
             if (preg_match($key, $requestUri, $matches)) {
                 array_shift($matches);
-
                 $closure($matches);
                 return;
             }
