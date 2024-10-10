@@ -20,13 +20,9 @@ class Session
         return false;
     }
 
-    public function isLogged(): bool
+    public function isAuthenticated(): bool
     {
-        if (isset($_SESSION['is_logged']) && $_SESSION['is_logged'] === true) {
-            return true;
-        }
-
-        return false;
+        return isset($_SESSION['is_logged']) && $_SESSION['is_logged'] === true;
     }
 
     public function createFlashMessage(string $message): void
@@ -34,7 +30,7 @@ class Session
         $_SESSION['message'] = $message;
     }
 
-    public function getFlashMessage(): void
+    public function displayFlashMessage(): void
     {
         if (isset($_SESSION['message'])) {
             echo $_SESSION['message'];
@@ -48,10 +44,10 @@ class Session
         $_SESSION['status'] = $user['status'];
     }
 
-    public function destruct(): void
+    public function destroySession(): void
     {
         session_start();
-        unset($_SESSION);
+        $_SESSION = [];
         session_destroy();
     }
 }

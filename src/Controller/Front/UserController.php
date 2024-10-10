@@ -159,7 +159,7 @@ class UserController extends AbstractController
     {
         $session = new Session();
 
-        $session->destruct();
+        $session->destroySession();
 
         $session->createFlashMessage('Vous êtes déconnecté!');
         header('Location:/code-et-compote/');

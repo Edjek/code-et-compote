@@ -31,7 +31,7 @@ $session = new Session();
         <a class="navbar-brand" href="/code-et-compote/" class=""><i class="bi bi-code-slash"></i> Code et Compote</a>
 
         <nav class="ms-auto d-flex gap-3 text-light">
-            <?php if ($session->isLogged()) { ?>
+            <?php if ($session->isAuthenticated()) { ?>
                 <a class="nav-link" href="/code-et-compote/deconnexion">deconnexion</a>
             <?php  } else { ?>
                 <a class="nav-link" href="/code-et-compote/inscription">inscription</a>
@@ -41,7 +41,7 @@ $session = new Session();
             <a class="nav-link" href="/code-et-compote/contactez-nous">contact</a>
         </nav>
     </header>
-    <?php $session->getFlashMessage(); ?>
+    <?php $session->displayFlashMessage(); ?>
 
     <main class="p-4">
 
