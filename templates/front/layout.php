@@ -31,13 +31,13 @@ $session = new Session();
         <a class="navbar-brand" href="/code-et-compote/" class=""><i class="bi bi-code-slash"></i> Code et Compote</a>
 
         <nav class="ms-auto d-flex gap-3 text-light">
-            <!-- Je ne veux afficher ce lien que si l'utilisateur est admin -->
-                <!-- route /admin/dashboard -->
-                    <!-- AdminController -->
-                        <!-- methode showDashboard  =>  /templates/admin/dashboard.php -->
-            <a href="" class="nav-link">Tableau de bord</a>
+            <?php if ($session->isAdmin()) {
+            ?>
 
-            <?php if ($session->isAuthenticated()) { ?>
+                <a href="/code-et-compote/admin/dashboard" class="nav-link">Tableau de bord</a>
+            <?php
+            }
+            if ($session->isAuthenticated()) { ?>
                 <a class="nav-link" href="/code-et-compote/deconnexion">deconnexion</a>
             <?php  } else { ?>
                 <a class="nav-link" href="/code-et-compote/inscription">inscription</a>
