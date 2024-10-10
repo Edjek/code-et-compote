@@ -6,7 +6,7 @@
                 <?php foreach ($topics as $topic) { ?>
                     <tr>
                         <td>
-                            <a href="/code-etcompote/topic/<?= htmlspecialchars($topic['id']); ?>">
+                            <a href="/code-et-compote/topic/<?= htmlspecialchars($topic['id']); ?>">
                                 <?= htmlspecialchars($topic['title']); ?>
                             </a>
                         </td>

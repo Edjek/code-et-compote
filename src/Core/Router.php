@@ -54,6 +54,13 @@ class Router
             $this->currentController = new UserController();
             $this->currentController->logout();
         });
+
+        $this->addRoutes('/topic/{id}', function($params){
+            echo $params['id'];
+            die;
+            // $this->currentController = new TopicController();
+            // $this->currentController->showTopic();
+        });
     }
 
     /**
@@ -64,7 +71,13 @@ class Router
      */
     private function addRoutes(string $route, callable $closure): void
     {
-        $this->routes[$route] = $closure;
+        $pattern = str_replace('/', '\/', $route);
+
+        $pattern = preg_replace('/\{(\w+)\}/', '(?P<$1>[^\/]+)', $pattern);
+
+        $pattern = '/^' . $pattern . '$/';
+
+        $this->routes[$pattern] = $closure;
     }
 
     /**
@@ -76,8 +89,10 @@ class Router
         $requestUri = str_replace('/code-et-compote', '', $requestUri);
 
         foreach ($this->routes as $key => $closure) {
-            if ($requestUri === $key) {
-                $closure();
+            if (preg_match($key, $requestUri, $matches)) {
+                array_shift($matches);
+
+                $closure($matches);
                 return;
             }
         }
