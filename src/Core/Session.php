@@ -42,6 +42,7 @@ class Session
     {
         $_SESSION['is_logged'] = true;
         $_SESSION['status'] = $user['status'];
+        $_SESSION['id'] = $user['id'];
     }
 
     public function destroySession(): void

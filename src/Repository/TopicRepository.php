@@ -25,4 +25,11 @@ class TopicRepository extends AbstractRepository
 
         return $stmt->fetchAll();
     }
+
+    public function addMessageByTopicId($content, $userId, $topicId)
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO message (content, user_id, topic_id) VALUES(:content, :user_id, :topic_id)');
+
+        $stmt->execute([':content' => $content, ':user_id' => $userId, ':topic_id' => $topicId]);
+    }
 }

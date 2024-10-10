@@ -36,7 +36,7 @@ class Router
             $this->currentController->showSignUpForm();
         });
 
-        $this->addRoutes('/processSignUpForm', function (): void {
+        $this->addRoutes('/process-sign-up-form', function (): void {
             $this->currentController = new UserController();
             $this->currentController->processSignUpForm();
         });
@@ -46,7 +46,7 @@ class Router
             $this->currentController->showSignInForm();
         });
 
-        $this->addRoutes('/processSignInForm', function (): void {
+        $this->addRoutes('/process-sign-in-form', function (): void {
             $this->currentController = new UserController();
             $this->currentController->processSignInForm();
         });
@@ -59,6 +59,11 @@ class Router
         $this->addRoutes('/topic/{id}', function (array $params): void {
             $this->currentController = new TopicController();
             $this->currentController->showTopic($params);
+        });
+
+        $this->addRoutes('/messages/process-form', function (): void {
+            $this->currentController = new TopicController();
+            $this->currentController->processAddMessageForm();
         });
     }
 
