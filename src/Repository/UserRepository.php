@@ -18,6 +18,18 @@ class UserRepository extends AbstractRepository
     }
 
     /**
+     * @return array|false
+     */
+    public function findById(int $id): array|false
+    {
+        $stmt = $this->pdo->prepare('SELECT * from user WHERE id=:id');
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    /**
      * @param string $username
      * @param string $email
      * @param string $pswd

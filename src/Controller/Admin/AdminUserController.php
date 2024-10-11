@@ -39,7 +39,8 @@ class AdminUserController extends AbstractController
             exit;
         }
 
-        // recuperer de la bdd l'utilisateur qui a cet $id findById($id)
+        $repository = new UserRepository();
+        $user = $repository->findById($id);
 
         $this->render('admin/updateUserForm', ['id' => $id, 'user' => $user]);
     }
