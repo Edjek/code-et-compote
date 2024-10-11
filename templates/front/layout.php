@@ -33,7 +33,6 @@ $session = new Session();
         <nav class="ms-auto d-flex gap-3 text-light">
             <?php if ($session->isAdmin()) {
             ?>
-
                 <a href="/code-et-compote/admin/dashboard" class="nav-link">Tableau de bord</a>
             <?php
             }

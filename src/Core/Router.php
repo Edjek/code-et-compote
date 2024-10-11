@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Controller\Admin\AdminController;
+use App\Controller\Admin\AdminUserController;
 use App\Controller\Front\ContactController;
 use App\Controller\Front\HomeController;
 use App\Controller\Front\TopicController;
@@ -70,6 +71,11 @@ class Router
         $this->addRoutes('/admin/dashboard', function (): void {
             $this->currentController = new AdminController();
             $this->currentController->showDashboard();
+        });
+
+        $this->addRoutes('/admin/utilisateurs', function (): void {
+            $this->currentController = new AdminUserController();
+            $this->currentController->showUsers();
         });
     }
 

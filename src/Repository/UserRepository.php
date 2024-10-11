@@ -7,6 +7,17 @@ use App\Repository\AbstractRepository;
 class UserRepository extends AbstractRepository
 {
     /**
+     * @return array|false
+     */
+    public function findAll(): array|false
+    {
+        $stmt = $this->pdo->prepare('SELECT * from user');
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    /**
      * @param string $username
      * @param string $email
      * @param string $pswd
