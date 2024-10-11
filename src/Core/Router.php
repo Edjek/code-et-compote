@@ -82,6 +82,10 @@ class Router
             $this->currentController = new AdminUserController();
             $this->currentController->showUpdateUserForm($params);
         });
+        $this->addRoutes('/admin/users/process-update-user-form', function (): void {
+            $this->currentController = new AdminUserController();
+            $this->currentController->processUpdateUserForm();
+        });
     }
 
     /**
