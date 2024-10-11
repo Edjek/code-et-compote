@@ -25,8 +25,22 @@ class AdminUserController extends AbstractController
 
     public function showUpdateUserForm($params)
     {
+        $session = new Session();
+
+        if ($session->isAdmin() === false) {
+            header('Location:/code-et-compote/');
+            exit;
+        }
+
         $id = $params['id'];
 
-        $this->render('admin/updateUserForm', ['id'=> $id]);
+        if (filter_var($id, FILTER_VALIDATE_INT) === false) {
+            header('Location:/code-et-compote/admin/utilisateurs');
+            exit;
+        }
+
+        // recuperer de la bdd l'utilisateur qui a cet $id findById($id)
+
+        $this->render('admin/updateUserForm', ['id' => $id, 'user' => $user]);
     }
 }
