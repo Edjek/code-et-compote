@@ -90,7 +90,7 @@ class AdminUserController extends AbstractController
 
         $pseudo = trim($_POST['pseudo']);
         $email = trim($_POST['email']);
-        $pswd = trim($_POST['pswd']);
+        $pswd = password_hash(trim($_POST['pswd']), PASSWORD_DEFAULT);
         $status = trim($_POST['status']);
 
         $repository = new UserRepository();
