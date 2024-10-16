@@ -178,4 +178,30 @@ class AdminUserController extends AbstractController
         header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
         exit;
     }
+
+    /**
+     * @param array $params
+     *
+     * @return void
+     */
+    public function deleteUser(array $params): void
+    {
+        $session = new Session();
+
+        if ($session->isAdmin() === false) {
+            header('Location:/code-et-compote/');
+            exit;
+        }
+
+        $id = $params['id'];
+
+        $repository = new UserRepository();
+        $repository->deleteUser($id);
+
+        $session = new  Session();
+        $session->createFlashMessage('Un utilisateur a été supprimé');
+
+        header('Location:/code-et-compote/admin/utilisateurs');
+        exit;
+    }
 }

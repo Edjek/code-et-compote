@@ -109,4 +109,17 @@ class UserRepository extends AbstractRepository
 
         $stmt->execute();
     }
+
+    /**
+     * @param int $id
+     *
+     * @return void
+     */
+    public function deleteUser(int $id): void
+    {
+        $stmt = $this->pdo->prepare('DELETE FROM user WHERE id=:id');
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
+    }
 }

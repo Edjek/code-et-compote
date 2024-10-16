@@ -97,6 +97,11 @@ class Router
             $this->currentController = new AdminUserController();
             $this->currentController->processAddUserForm();
         });
+
+        $this->addRoutes('/admin/utilisateurs/supprimer/{id}', function (array $params): void {
+            $this->currentController = new AdminUserController();
+            $this->currentController->deleteUser($params);
+        });
     }
 
     /**

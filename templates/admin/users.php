@@ -10,7 +10,7 @@
                     <td><?= $user['username']; ?></td>
                     <td><?= $user['email']; ?></td>
                     <td><a href="/code-et-compote/admin/utilisateurs/modifier/<?= $user['id']; ?>" class="btn btn-warning">Modifier</a></td>
-                    <td><a href="" class="btn btn-danger">supprimer</a></td>
+                    <td><a href="/code-et-compote/admin/utilisateurs/supprimer/<?= $user['id']; ?>" class="btn btn-danger">supprimer</a></td>
                 </tr>
             <?php } ?>
         </table>
