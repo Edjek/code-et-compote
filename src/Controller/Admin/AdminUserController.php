@@ -10,7 +10,7 @@ class AdminUserController extends AbstractController
     /**
      * @return void
      */
-    private function checkAdmin(): void
+    private function checkAdminAuthorization(): void
     {
         if ($this->session->isAdmin() === false) {
             header('Location:/code-et-compote/');
@@ -23,7 +23,7 @@ class AdminUserController extends AbstractController
      */
     public function showUsers(): void
     {
-        $this->checkAdmin();
+        $this->checkAdminAuthorization();
 
         $repository = new UserRepository();
         $users = $repository->findAll();
@@ -36,7 +36,7 @@ class AdminUserController extends AbstractController
      */
     public function showAddUserForm(): void
     {
-        $this->checkAdmin();
+        $this->checkAdminAuthorization();
 
         $this->render('admin/add-user-form');
     }
@@ -46,7 +46,7 @@ class AdminUserController extends AbstractController
      */
     public function processAddUserForm(): void
     {
-        $this->checkAdmin();
+        $this->checkAdminAuthorization();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location:/code-et-compote/admin/utilisateurs/ajouter');
@@ -109,7 +109,7 @@ class AdminUserController extends AbstractController
      */
     public function showUpdateUserForm(array $params): void
     {
-        $this->checkAdmin();
+        $this->checkAdminAuthorization();
 
         $id = $params['id'];
 
@@ -129,7 +129,7 @@ class AdminUserController extends AbstractController
      */
     public function processUpdateUserForm(): void
     {
-        $this->checkAdmin();
+        $this->checkAdminAuthorization();
 
         $id = trim(htmlspecialchars($_POST['id']));
 
@@ -182,7 +182,7 @@ class AdminUserController extends AbstractController
      */
     public function deleteUser(array $params): void
     {
-        $this->checkAdmin();
+        $this->checkAdminAuthorization();
 
         $id = $params['id'];
 
