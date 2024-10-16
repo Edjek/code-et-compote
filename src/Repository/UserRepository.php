@@ -45,6 +45,26 @@ class UserRepository extends AbstractRepository
 
     /**
      * @param string $username
+     * @param string $email
+     * @param string $pswd
+     * @param string $status
+     *
+     * @return void
+     */
+    public function addUserWithStatus(string $username, string $email, string $pswd, string $status): void
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO user (username, email, password, status) VALUES (:username, :email, :pswd, :status)');
+
+        $stmt->execute([
+            ':username' => $username,
+            ':email' => $email,
+            ':pswd' => $pswd,
+            ':status' => $status
+        ]);
+    }
+
+    /**
+     * @param string $username
      *
      * @return array|bool
      */
@@ -71,6 +91,14 @@ class UserRepository extends AbstractRepository
         return $stmt->fetch();
     }
 
+    /**
+     * @param int $id
+     * @param string $username
+     * @param string $email
+     * @param string $status
+     *
+     * @return void
+     */
     public function updateUserById(int $id, string $username, string $email, string $status): void
     {
         $stmt = $this->pdo->prepare('UPDATE user SET username=:username, email=:email, status=:status WHERE id=:id');
@@ -78,6 +106,7 @@ class UserRepository extends AbstractRepository
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':status', $status);
+
         $stmt->execute();
     }
 }

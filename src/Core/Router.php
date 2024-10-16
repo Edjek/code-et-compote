@@ -78,13 +78,24 @@ class Router
             $this->currentController->showUsers();
         });
 
-        $this->addRoutes('/admin/users/modifier/{id}', function (array $params): void {
+        $this->addRoutes('/admin/utilisateurs/modifier/{id}', function (array $params): void {
             $this->currentController = new AdminUserController();
             $this->currentController->showUpdateUserForm($params);
         });
-        $this->addRoutes('/admin/users/process-update-user-form', function (): void {
+
+        $this->addRoutes('/admin/utilisateurs/process-update-user-form', function (): void {
             $this->currentController = new AdminUserController();
             $this->currentController->processUpdateUserForm();
+        });
+
+        $this->addRoutes('/admin/utilisateurs/ajouter', function (): void {
+            $this->currentController = new AdminUserController();
+            $this->currentController->showAddUserForm();
+        });
+
+        $this->addRoutes('/admin/utilisateurs/process-add-user-form', function (): void {
+            $this->currentController = new AdminUserController();
+            $this->currentController->processAddUserForm();
         });
     }
 

@@ -1,14 +1,10 @@
-<h1>Tableau de bord</h1>
+<section>
+    <h1 class="display-5">Tableau de bord</h1>
 
-<!-- creer une route /admin/utilisateurs -->
-    <!-- dans le dossier admin AdminUserController -->
-    <!-- showUsers -->
-        <!-- findAll() -->
-        <!-- Affiche une page users.php qui affiche la liste des utilisateurs -->
-
-<a href="/code-et-compote/admin/utilisateurs">utilisateur</a>
-
-<a href="">topic</a>
-<a href="">message</a>
-<a href="">categorie</a>
-
+    <div class="w-75 mx-auto my-5">
+        <a href="/code-et-compote/admin/utilisateurs" class="btn btn-warning">utilisateur</a>
+        <a href="" class="btn btn-warning">topic</a>
+        <a href="" class="btn btn-warning">message</a>
+        <a href="" class="btn btn-warning">categorie</a>
+    </div>
+</section>

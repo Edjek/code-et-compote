@@ -23,6 +23,81 @@ class AdminUserController extends AbstractController
         $this->render('admin/users', ['users' => $users]);
     }
 
+    public function showAddUserForm()
+    {
+        $session = new Session();
+
+        if ($session->isAdmin() === false) {
+            header('Location:/code-et-compote/');
+            exit;
+        }
+
+        $this->render('admin/add-user-form');
+    }
+
+    public function processAddUserForm()
+    {
+        $session = new Session();
+
+        if ($session->isAdmin() === false) {
+            header('Location:/code-et-compote/');
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location:/code-et-compote/admin/utilisateurs/ajouter');
+            exit;
+        }
+
+        if (!isset($_POST['pseudo']) || empty($_POST['pseudo'])) {
+            $session->createFlashMessage('Veuillez ajouter un pseudo');
+
+            header('Location:/code-et-compote/admin/utilisateurs/ajouter');
+            exit;
+        }
+
+        if (!isset($_POST['email']) || empty($_POST['email'])) {
+            $session->createFlashMessage('Veuillez ajouter un email');
+
+            header('Location:/code-et-compote/admin/utilisateurs/ajouter');
+            exit;
+        }
+
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $session->createFlashMessage('Votre email n\'est pas correct');
+
+            header('Location:/code-et-compote/admin/utilisateurs/ajouter');
+            exit;
+        }
+
+        if (!isset($_POST['pswd']) || empty($_POST['pswd'])) {
+            $session->createFlashMessage('Veuillez ajouter un mot de passe');
+
+            header('Location:/code-et-compote/admin/utilisateurs/ajouter');
+            exit;
+        }
+
+        if (!isset($_POST['status']) || empty($_POST['status'])) {
+            $session->createFlashMessage('Veuillez selectionner un status');
+
+            header('Location:/code-et-compote/admin/utilisateurs/ajouter');
+            exit;
+        }
+
+        $pseudo = trim($_POST['pseudo']);
+        $email = trim($_POST['email']);
+        $pswd = trim($_POST['pswd']);
+        $status = trim($_POST['status']);
+
+        $repository = new UserRepository();
+        $repository->addUserWithStatus($pseudo, $email, $pswd, $status);
+
+        $session->createFlashMessage('Un nouvel utilisateur a été ajouté');
+
+        header('Location:/code-et-compote/admin/utilisateurs');
+        exit;
+    }
+
     public function showUpdateUserForm($params)
     {
         $session = new Session();
@@ -42,7 +117,7 @@ class AdminUserController extends AbstractController
         $repository = new UserRepository();
         $user = $repository->findById($id);
 
-        $this->render('admin/updateUserForm', ['id' => $id, 'user' => $user]);
+        $this->render('admin/update-user-form', ['id' => $id, 'user' => $user]);
     }
 
     public function processUpdateUserForm()
@@ -57,7 +132,7 @@ class AdminUserController extends AbstractController
         $id = trim(htmlspecialchars($_POST['id']));
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location:/code-et-compote/admin/users/modifier/' . $id);
+            header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
             exit;
         }
 
@@ -65,7 +140,7 @@ class AdminUserController extends AbstractController
 
             $session->createFlashMessage('Veuillez ajouter un pseudo');
 
-            header('Location:/code-et-compote/admin/users/modifier/' . $id);
+            header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
 
             exit;
         }
@@ -73,21 +148,21 @@ class AdminUserController extends AbstractController
         if (!isset($_POST['email']) || empty($_POST['email'])) {
             $session->createFlashMessage('Veuillez ajouter un email');
 
-            header('Location:/code-et-compote/admin/users/modifier/' . $id);
+            header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
             exit;
         }
 
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $session->createFlashMessage('Votre email n\'est pas correct');
 
-            header('Location:/code-et-compote/admin/users/modifier/' . $id);
+            header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
             exit;
         }
 
         if (!isset($_POST['status']) || empty($_POST['status'])) {
             $session->createFlashMessage('Veuillez selectionner un status');
 
-            header('Location:/code-et-compote/admin/users/modifier/' . $id);
+            header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
             exit;
         }
 
@@ -98,7 +173,9 @@ class AdminUserController extends AbstractController
         $repository = new UserRepository();
         $repository->updateUserById($id, $pseudo, $email, $status);
 
-        header('Location:/code-et-compote/admin/users/modifier/' . $id);
+        $session->createFlashMessage('Un utilisateur a été modifié');
+
+        header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
         exit;
     }
 }
