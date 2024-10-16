@@ -27,7 +27,11 @@ class Session
 
     public function createFlashMessage(string $message): void
     {
-        $_SESSION['message'] = $message;
+        $_SESSION['message'] =
+            '<div class="alert alert-success alert-dismissible fade show" role="alert">'
+            . $message .
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
     }
 
     public function displayFlashMessage(): void

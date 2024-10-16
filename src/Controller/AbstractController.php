@@ -2,8 +2,20 @@
 
 namespace App\Controller;
 
+use App\Core\Session;
+
 abstract class AbstractController
 {
+    /**
+     * @var Session
+     */
+    protected Session $session;
+
+    public function __construct()
+    {
+        $this->session = new Session();
+    }
+
     /**
      * @param string $path
      * @param array $array

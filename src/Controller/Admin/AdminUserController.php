@@ -3,19 +3,27 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AbstractController;
-use App\Core\Session;
 use App\Repository\UserRepository;
 
 class AdminUserController extends AbstractController
 {
-    public function showUsers(): void
+    /**
+     * @return void
+     */
+    private function checkAdmin(): void
     {
-        $session = new Session();
-
-        if ($session->isAdmin() === false) {
+        if ($this->session->isAdmin() === false) {
             header('Location:/code-et-compote/');
             exit;
         }
+    }
+
+    /**
+     * @return void
+     */
+    public function showUsers(): void
+    {
+        $this->checkAdmin();
 
         $repository = new UserRepository();
         $users = $repository->findAll();
@@ -23,26 +31,22 @@ class AdminUserController extends AbstractController
         $this->render('admin/users', ['users' => $users]);
     }
 
-    public function showAddUserForm()
+    /**
+     * @return void
+     */
+    public function showAddUserForm(): void
     {
-        $session = new Session();
-
-        if ($session->isAdmin() === false) {
-            header('Location:/code-et-compote/');
-            exit;
-        }
+        $this->checkAdmin();
 
         $this->render('admin/add-user-form');
     }
 
-    public function processAddUserForm()
+    /**
+     * @return void
+     */
+    public function processAddUserForm(): void
     {
-        $session = new Session();
-
-        if ($session->isAdmin() === false) {
-            header('Location:/code-et-compote/');
-            exit;
-        }
+        $this->checkAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location:/code-et-compote/admin/utilisateurs/ajouter');
@@ -50,35 +54,35 @@ class AdminUserController extends AbstractController
         }
 
         if (!isset($_POST['pseudo']) || empty($_POST['pseudo'])) {
-            $session->createFlashMessage('Veuillez ajouter un pseudo');
+            $this->session->createFlashMessage('Veuillez ajouter un pseudo');
 
             header('Location:/code-et-compote/admin/utilisateurs/ajouter');
             exit;
         }
 
         if (!isset($_POST['email']) || empty($_POST['email'])) {
-            $session->createFlashMessage('Veuillez ajouter un email');
+            $this->session->createFlashMessage('Veuillez ajouter un email');
 
             header('Location:/code-et-compote/admin/utilisateurs/ajouter');
             exit;
         }
 
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $session->createFlashMessage('Votre email n\'est pas correct');
+            $this->session->createFlashMessage('Votre email n\'est pas correct');
 
             header('Location:/code-et-compote/admin/utilisateurs/ajouter');
             exit;
         }
 
         if (!isset($_POST['pswd']) || empty($_POST['pswd'])) {
-            $session->createFlashMessage('Veuillez ajouter un mot de passe');
+            $this->session->createFlashMessage('Veuillez ajouter un mot de passe');
 
             header('Location:/code-et-compote/admin/utilisateurs/ajouter');
             exit;
         }
 
         if (!isset($_POST['status']) || empty($_POST['status'])) {
-            $session->createFlashMessage('Veuillez selectionner un status');
+            $this->session->createFlashMessage('Veuillez selectionner un status');
 
             header('Location:/code-et-compote/admin/utilisateurs/ajouter');
             exit;
@@ -92,20 +96,20 @@ class AdminUserController extends AbstractController
         $repository = new UserRepository();
         $repository->addUserWithStatus($pseudo, $email, $pswd, $status);
 
-        $session->createFlashMessage('Un nouvel utilisateur a été ajouté');
+        $this->session->createFlashMessage('Un nouvel utilisateur a été ajouté');
 
         header('Location:/code-et-compote/admin/utilisateurs');
         exit;
     }
 
-    public function showUpdateUserForm($params)
+    /**
+     * @param array $params
+     *
+     * @return void
+     */
+    public function showUpdateUserForm(array $params): void
     {
-        $session = new Session();
-
-        if ($session->isAdmin() === false) {
-            header('Location:/code-et-compote/');
-            exit;
-        }
+        $this->checkAdmin();
 
         $id = $params['id'];
 
@@ -120,14 +124,12 @@ class AdminUserController extends AbstractController
         $this->render('admin/update-user-form', ['id' => $id, 'user' => $user]);
     }
 
-    public function processUpdateUserForm()
+    /**
+     * @return void
+     */
+    public function processUpdateUserForm(): void
     {
-        $session = new Session();
-
-        if ($session->isAdmin() === false) {
-            header('Location:/code-et-compote/');
-            exit;
-        }
+        $this->checkAdmin();
 
         $id = trim(htmlspecialchars($_POST['id']));
 
@@ -137,31 +139,25 @@ class AdminUserController extends AbstractController
         }
 
         if (!isset($_POST['pseudo']) || empty($_POST['pseudo'])) {
-
-            $session->createFlashMessage('Veuillez ajouter un pseudo');
-
+            $this->session->createFlashMessage('Veuillez ajouter un pseudo');
             header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
-
             exit;
         }
 
         if (!isset($_POST['email']) || empty($_POST['email'])) {
-            $session->createFlashMessage('Veuillez ajouter un email');
-
+            $this->session->createFlashMessage('Veuillez ajouter un email');
             header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
             exit;
         }
 
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $session->createFlashMessage('Votre email n\'est pas correct');
-
+            $this->session->createFlashMessage('Votre email n\'est pas correct');
             header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
             exit;
         }
 
         if (!isset($_POST['status']) || empty($_POST['status'])) {
-            $session->createFlashMessage('Veuillez selectionner un status');
-
+            $this->session->createFlashMessage('Veuillez selectionner un status');
             header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
             exit;
         }
@@ -173,7 +169,7 @@ class AdminUserController extends AbstractController
         $repository = new UserRepository();
         $repository->updateUserById($id, $pseudo, $email, $status);
 
-        $session->createFlashMessage('Un utilisateur a été modifié');
+        $this->session->createFlashMessage('Un utilisateur a été modifié');
 
         header('Location:/code-et-compote/admin/utilisateurs/modifier/' . $id);
         exit;
@@ -186,20 +182,14 @@ class AdminUserController extends AbstractController
      */
     public function deleteUser(array $params): void
     {
-        $session = new Session();
-
-        if ($session->isAdmin() === false) {
-            header('Location:/code-et-compote/');
-            exit;
-        }
+        $this->checkAdmin();
 
         $id = $params['id'];
 
         $repository = new UserRepository();
         $repository->deleteUser($id);
 
-        $session = new  Session();
-        $session->createFlashMessage('Un utilisateur a été supprimé');
+        $this->session->createFlashMessage('Un utilisateur a été supprimé');
 
         header('Location:/code-et-compote/admin/utilisateurs');
         exit;
